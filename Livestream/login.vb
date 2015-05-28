@@ -9,10 +9,9 @@ Public Class login
     End Property
 
     Dim access_token As String = ""
+    Dim authUrl As String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=p692y6s6wbfvvvbr57gbps19inbkj9l&redirect_uri=https://github.com/SgtWilkie&scope=user_read"
 
     Private Sub login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        Dim authUrl As String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=rt8pansev8rj82ka6vb3i3x6q4229tx&redirect_uri=http://localhost&scope=user_read"
 
         WebBrowser1.Navigate(authUrl)
 
@@ -28,6 +27,11 @@ Public Class login
             access_token = access_token.Remove(access_token.IndexOf("&"), access_token.Length - access_token.IndexOf("&"))
             WebBrowser1.Stop()
             Me.Close()
+
+            'ElseIf url = "https://api.twitch.tv/kraken/oauth2/login" Then
+
+            '    WebBrowser1.Stop()
+            '    WebBrowser1.Navigate(authUrl)
 
         End If
 

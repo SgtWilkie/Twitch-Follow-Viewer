@@ -44,7 +44,6 @@ Public Class main
                 My.Settings.Save()
 
             End If
-
         End If
 
         'Check username and livestreamer path exist
@@ -300,6 +299,7 @@ Public Class main
         'if auth token exists get followed streams
         If My.Settings.authToken <> "" Then
 
+            lblRefresh.Visible = True
             getStreams.RunWorkerAsync()
 
         Else
@@ -413,22 +413,17 @@ Public Class main
     Private Sub tsbSettings_Click(sender As Object, e As EventArgs) Handles tsbSettings.Click
 
         Dim frmSettings As New settings
-        Dim loggedIn As Boolean
-
-        If My.Settings.authToken = "" Then
-            loggedIn = False
-        Else
-            loggedIn = True
-        End If
 
         Dim result As DialogResult = frmSettings.ShowDialog(Me)
 
         If result = Windows.Forms.DialogResult.OK Then
 
             'set interval to user's input and save in settings
-            My.Settings.refresh = frmSettings.interval
-            My.Settings.Save()
-            timerAutoRefresh.Interval = frmSettings.interval * 60000
+            If My.Settings.refresh <> frmSettings.interval Then
+                My.Settings.refresh = frmSettings.interval
+                My.Settings.Save()
+                timerAutoRefresh.Interval = frmSettings.interval * 60000
+            End If
 
             If My.Settings.livestreamer = "" Then
                 ToolStripMenuItem1.Enabled = False
