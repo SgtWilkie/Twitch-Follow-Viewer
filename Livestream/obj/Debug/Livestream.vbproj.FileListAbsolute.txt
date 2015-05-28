@@ -1,0 +1,88 @@
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\bin\Debug\Livestream.exe.config
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\bin\Debug\Livestream.exe
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\bin\Debug\Livestream.pdb
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\bin\Debug\Livestream.xml
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.Form1.resources
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.Resources.resources
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.vbproj.GenerateResource.Cache
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.exe
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.xml
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.pdb
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\bin\Debug\Livestream.exe.manifest
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\bin\Debug\Livestream.application
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.exe.manifest
+C:\Users\Ryan\AppData\Local\Temporary Projects\Livestream\obj\Debug\Livestream.application
+C:\Users\Ryan\Desktop\Livestream\Livestream\bin\Debug\Livestream.exe.config
+C:\Users\Ryan\Desktop\Livestream\Livestream\obj\Debug\Livestream.exe
+C:\Users\Ryan\Desktop\Livestream\Livestream\obj\Debug\Livestream.xml
+C:\Users\Ryan\Desktop\Livestream\Livestream\obj\Debug\Livestream.pdb
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream.Resources.resources
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream.vbproj.GenerateResource.Cache
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Livestream Launcher.exe.config
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Livestream Launcher.exe.manifest
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Livestream Launcher.application
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Livestream Launcher.exe
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Livestream Launcher.pdb
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\Livestream Launcher.xml
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\System.dll
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\System.Drawing.dll
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\System.Windows.Forms.dll
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\System.Xml.dll
+C:\Users\Ryan\Documents\Livestream\Livestream\bin\Debug\System.Xml.Linq.dll
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream.vbprojResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream Launcher.exe.manifest
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream Launcher.application
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream Launcher.exe
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream Launcher.xml
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream Launcher.pdb
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.exe.config
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.exe
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.xml
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.pdb
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.exe.manifest
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.application
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.exe
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.pdb
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.xml
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Newtonsoft.Json.dll
+E:\Visual Basic\Livestream\Livestream\bin\Debug\System.dll
+E:\Visual Basic\Livestream\Livestream\bin\Debug\System.Drawing.dll
+E:\Visual Basic\Livestream\Livestream\bin\Debug\System.Windows.Forms.dll
+E:\Visual Basic\Livestream\Livestream\bin\Debug\System.Xml.dll
+E:\Visual Basic\Livestream\Livestream\bin\Debug\System.Xml.Linq.dll
+E:\Visual Basic\Livestream\Livestream\bin\Debug\Newtonsoft.Json.xml
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.vbprojResolveAssemblyReference.cache
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.livestreamStarter.resources
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.Resources.resources
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.refresh.resources
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.vbproj.GenerateResource.Cache
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.exe.manifest
+E:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.application
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.exe.config
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.exe
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.xml
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.pdb
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.exe.manifest
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.application
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.exe
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.pdb
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Livestream Launcher.xml
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Newtonsoft.Json.dll
+H:\Visual Basic\Livestream\Livestream\bin\Debug\System.dll
+H:\Visual Basic\Livestream\Livestream\bin\Debug\System.Drawing.dll
+H:\Visual Basic\Livestream\Livestream\bin\Debug\System.Windows.Forms.dll
+H:\Visual Basic\Livestream\Livestream\bin\Debug\System.Xml.dll
+H:\Visual Basic\Livestream\Livestream\bin\Debug\System.Xml.Linq.dll
+H:\Visual Basic\Livestream\Livestream\bin\Debug\Newtonsoft.Json.xml
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.vbprojResolveAssemblyReference.cache
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.livestreamStarter.resources
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.Resources.resources
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.refresh.resources
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream.vbproj.GenerateResource.Cache
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.exe.manifest
+H:\Visual Basic\Livestream\Livestream\obj\Debug\Livestream Launcher.application
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream.login.resources
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream.main.resources
+C:\Users\Ryan\Documents\Livestream\Livestream\obj\Debug\Livestream.settings.resources
