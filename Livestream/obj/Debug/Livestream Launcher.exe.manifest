@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Livestream Launcher.exe" size="63488">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Livestream Launcher.exe" size="70656">
       <assemblyIdentity name="Livestream Launcher" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ktc+Ses5blx8tRb2ldo9ge9chlasyGDvJv50K2HaxXU=</dsig:DigestValue>
+        <dsig:DigestValue>/IDI/OQSF4gt7hslwuEtR5zt7cEaLj992Zi48Qbmb5U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

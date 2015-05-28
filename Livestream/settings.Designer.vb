@@ -62,9 +62,12 @@ Partial Class settings
         'nupInterval
         '
         Me.nupInterval.Location = New System.Drawing.Point(110, 106)
+        Me.nupInterval.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.nupInterval.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nupInterval.Name = "nupInterval"
         Me.nupInterval.Size = New System.Drawing.Size(120, 20)
         Me.nupInterval.TabIndex = 2
+        Me.nupInterval.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lnlInterval
         '

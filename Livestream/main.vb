@@ -28,6 +28,7 @@ Public Class main
     Dim username As String              'string to hold username
     Dim sortColumn As Integer = -1
     Dim streamerName As ColumnHeader
+    Dim tab As Integer = 0
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -52,6 +53,9 @@ Public Class main
         'Auto resize colums to fit content
         lvFollowed.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
         lvFollowed.Columns(0).Width = 0
+
+        lvTop20.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
+        lvTop20.Columns(0).Width = 0
 
     End Sub
 
@@ -82,11 +86,48 @@ Public Class main
 
     Private Sub getListStreamer(ByVal source As String)
 
+        Dim listview As ListView
+
+        If TabControl1.SelectedIndex = 0 Then
+            listview = lvFollowed
+        ElseIf TabControl1.SelectedIndex = 1 Then
+            listview = lvTop20
+        Else
+            listview = lvSearch
+        End If
+
         'if a stream is selected
-        If lvFollowed.SelectedItems(0).Text <> "" Then
+        If listview.SelectedItems(0).Text <> "" Then
 
-            openStream(lvFollowed.SelectedItems(0).Text, source)
+            If Not My.Computer.FileSystem.FileExists(My.Settings.livestreamer) Then
 
+                My.Settings.livestreamer = ""
+                My.Settings.defaultViewer = "browser"
+                source = "browser"
+
+            End If
+
+            openStream(listview.SelectedItems(0).Text, source)
+
+        End If
+
+    End Sub
+
+    Private Sub getStreamsStarter(ByVal auth As Boolean)
+
+        If tab = 2 Then
+            'get search results
+            getStreams.RunWorkerAsync()
+        Else
+            If auth <> False Then
+                tab = 0
+                'get followed streams
+                getStreams.RunWorkerAsync()
+            Else
+                tab = 1
+                'get top 20 streams
+                getStreams.RunWorkerAsync()
+            End If
         End If
 
     End Sub
@@ -94,12 +135,19 @@ Public Class main
     Private Sub getStreams_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles getStreams.DoWork
 
         'initialise variables
-        Dim jsonString As String = "https://api.twitch.tv/kraken/streams/followed?oauth_token=" & My.Settings.authToken & "&limit=100"
+        Dim jsonString As String = ""
         Dim allOnlineComplete As Boolean = False
-        Dim streams As Integer = 0      'integer to hold the amount of streamers in the query
         Dim allStreams As Integer = 0
+        Dim streams As String()
 
-        System.IO.File.Create(FILE_NAME).Dispose()
+        Select Case tab
+            Case 0
+                jsonString = "https://api.twitch.tv/kraken/streams/followed?oauth_token=" & My.Settings.authToken & "&limit=100"
+            Case 1
+                jsonString = "https://api.twitch.tv/kraken/streams?limit=20"
+            Case 2
+                jsonString = "https://api.twitch.tv/kraken/search/streams?q=" & txtSearch.Text
+        End Select
 
         While allOnlineComplete = False
 
@@ -112,41 +160,56 @@ Public Class main
             'create list of channels
             Dim channels As IList(Of JToken) = online("streams").Children.ToList
 
-            Using objWriter As New System.IO.StreamWriter(FILE_NAME, True)
+            'iterate through the channels
+            For Each channel In channels
 
-                'iterate through the channels
-                For Each channel In channels
+                'get name and display name
+                Dim name As JToken = channel("channel")("name")
+                Dim display As JToken = channel("channel")("display_name")
+                Dim game As JToken = channel("game")
+                Dim viewers As JToken = channel("viewers")
 
-                    'get name and display name
-                    Dim name As JToken = channel("channel")("name")
-                    Dim display As JToken = channel("channel")("display_name")
-                    Dim game As JToken = channel("game")
-                    Dim viewers As JToken = channel("viewers")
+                streams.Add(name.ToString & "," & display.ToString & "," & game.ToString & "," & viewers.ToString)
 
-                    objWriter.WriteLine(name.ToString & "," & display.ToString & "," & game.ToString & "," & viewers.ToString)
+                allStreams += 1
 
-                    allStreams += 1
+            Next
 
-                Next
-
-            End Using
-
-            Dim total As JToken = online("_total")
-            If allStreams < CInt(total) Then
-                Dim nextLink As String = "https://api.twitch.tv/kraken/streams/followed?oauth_token=" & My.Settings.authToken & "&limit=100&offset=" & allStreams.ToString
-                jsonString = nextLink.ToString
+            If tab = 0 Then
+                Dim total As JToken = online("_total")
+                If allStreams < CInt(total) Then
+                    Dim nextLink As String = "https://api.twitch.tv/kraken/streams/followed?oauth_token=" & My.Settings.authToken & "&limit=100&offset=" & allStreams.ToString
+                    jsonString = nextLink.ToString
+                Else
+                    allOnlineComplete = True
+                End If
             Else
                 allOnlineComplete = True
             End If
 
         End While
 
+        System.IO.File.WriteAllLines(FILE_NAME, streams)
+
     End Sub
 
     Private Sub getStreams_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles getStreams.RunWorkerCompleted
 
+        Dim listview As ListView
+
+        If tab = 0 Then
+            listview = lvFollowed
+            tab = 1
+            'get top 20 streams
+            getStreams.RunWorkerAsync()
+        ElseIf tab = 1 Then
+            listview = lvTop20
+        Else
+            listview = lvSearch
+        End If
+
         'clear list view
-        lvFollowed.Items.Clear()
+        listview.Items.Clear()
 
         'Load streamer database
         Dim lines() As String = System.IO.File.ReadAllLines(FILE_NAME)
@@ -164,7 +227,7 @@ Public Class main
             arr(2) = fields(2)
             arr(3) = fields(3)
 
-            lvFollowed.Items.Add(New ListViewItem(arr))
+            listview.Items.Add(New ListViewItem(arr))
 
         Next
 
@@ -172,15 +235,15 @@ Public Class main
         System.IO.File.Delete(FILE_NAME)
 
         'Auto resize colums to fit content
-        lvFollowed.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent)
-        lvFollowed.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent)
-        lvFollowed.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize)
+        listview.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent)
+        listview.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent)
+        listview.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize)
 
         'sort by viewers
         Dim sort_order As SortOrder = SortOrder.Descending
-        lvFollowed.Sorting = SortOrder.Descending
-        lvFollowed.Sort()
-        lvFollowed.ListViewItemSorter = New ListViewComparer2(sort_order)
+        listview.Sorting = SortOrder.Descending
+        listview.Sort()
+        listview.ListViewItemSorter = New ListViewComparer2(sort_order)
 
         'make refresh icon invisible
         lblRefresh.Visible = False
@@ -199,6 +262,7 @@ Public Class main
     Private Sub streamersRefresh()
 
         lvFollowed.Sorting = SortOrder.None
+        lvTop20.Sorting = SortOrder.None
 
         'make refresh icon visible
         lblRefresh.Visible = True
@@ -207,18 +271,10 @@ Public Class main
         btnRefresh.Enabled = False
 
         'begin streamer refresh
-        getStreams.RunWorkerAsync()
-
-    End Sub
-
-    Private Sub btnOpenStreamer_Click(sender As Object, e As EventArgs) Handles btnOpenStreamer.Click
-
-        'if textbox is empty use selected on list
-        If txtStreamer.Text = "" Then
-            getListStreamer(My.Settings.defaultViewer)
+        If My.Settings.authToken <> "" Then
+            getStreamsStarter(True)
         Else
-            'use streamer in textbox
-            openStream(txtStreamer.Text, My.Settings.defaultViewer)
+            getStreamsStarter(False)
         End If
 
     End Sub
@@ -300,9 +356,12 @@ Public Class main
         If My.Settings.authToken <> "" Then
 
             lblRefresh.Visible = True
-            getStreams.RunWorkerAsync()
+            getStreamsStarter(True)
+            'getStreams.RunWorkerAsync()
 
         Else
+
+            getStreamsStarter(False)
 
             lvFollowed.Items.Clear()
 
@@ -326,7 +385,7 @@ Public Class main
 
     End Sub
 
-    Private Sub lvFollowed_DoubleClick(sender As Object, e As EventArgs) Handles lvFollowed.DoubleClick
+    Private Sub lvFollowed_DoubleClick(sender As Object, e As EventArgs) Handles lvFollowed.DoubleClick, lvTop20.DoubleClick, lvSearch.DoubleClick
 
         'Open double-clicked stream
         getListStreamer(My.Settings.defaultViewer)
@@ -344,33 +403,33 @@ Public Class main
 
             If e.Column = 3 Then
                 ' Set the sort order to descending
-                lvFollowed.Sorting = SortOrder.Descending
+                sender.Sorting = SortOrder.Descending
                 sort_order = SortOrder.Descending
             Else
                 ' Set the sort order to ascending by default.
-                lvFollowed.Sorting = SortOrder.Ascending
+                sender.Sorting = SortOrder.Ascending
                 sort_order = SortOrder.Ascending
             End If
 
         Else
             ' Determine what the last sort order was and change it.
-            If lvFollowed.Sorting = SortOrder.Ascending Then
-                lvFollowed.Sorting = SortOrder.Descending
+            If sender.Sorting = SortOrder.Ascending Then
+                sender.Sorting = SortOrder.Descending
                 sort_order = SortOrder.Descending
             Else
-                lvFollowed.Sorting = SortOrder.Ascending
+                sender.Sorting = SortOrder.Ascending
                 sort_order = SortOrder.Ascending
             End If
         End If
         ' Call the sort method to manually sort.
-        lvFollowed.Sort()
+        sender.Sort()
         ' Set the ListViewItemSorter property to a new ListViewItemComparer
         ' object.
         If e.Column = 3 Then
-            lvFollowed.ListViewItemSorter = New ListViewComparer2(sort_order)
+            sender.ListViewItemSorter = New ListViewComparer2(sort_order)
         Else
-            lvFollowed.ListViewItemSorter = New ListViewItemComparer(e.Column, _
-                                                                             lvFollowed.Sorting)
+            sender.ListViewItemSorter = New ListViewItemComparer(e.Column, _
+                                                                             sender.Sorting)
         End If
 
 
@@ -404,7 +463,7 @@ Public Class main
 
         If e.Button = Windows.Forms.MouseButtons.Right Then
             If lvFollowed.FocusedItem.Bounds.Contains(e.Location) = True Then
-                ContextMenuStrip1.Show(Cursor.Position)
+                cmenuFollow.Show(Cursor.Position)
             End If
         End If
 
@@ -435,20 +494,24 @@ Public Class main
 
     End Sub
 
-    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click, ToolStripMenuItem5.Click
 
-        'if a stream is selected
-        If lvFollowed.SelectedItems(0).Text <> "" Then
-
-            openStream(lvFollowed.SelectedItems(0).Text, "browser")
-
-        End If
+        getListStreamer("browser")
 
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click, ToolStripMenuItem4.Click
 
         getListStreamer("livestreamer")
+
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+
+        If txtSearch.Text <> "" Then
+            tab = 2
+            getStreamsStarter(False)
+        End If
 
     End Sub
 End Class
